@@ -6,7 +6,7 @@ To install JuliaSCGA.jl, type the following command in the Julia REPL:
 ] add https://github.com/moon-dust/JuliaSCGA.jl
 ```
 
-In JuliaSCGA, the definition of the [UnitCell](src/UnitCell.jl), including the [InteractionMatrix](src/InteractionMatrix.jl) object, inherits from [SpinMC.jl](https://github.com/fbuessen/SpinMC.jl). As shown in the example, the *J*<sub>1</sub>-*J*<sub>2</sub> model on a diamond lattice can be defined as:
+In JuliaSCGA.jl, the definition of the [UnitCell](src/UnitCell.jl), including the [InteractionMatrix](src/InteractionMatrix.jl), inherits from [SpinMC.jl](https://github.com/fbuessen/SpinMC.jl). As shown in the example, the *J<sub>1</sub>-J<sub>2</sub>* model on a diamond lattice can be defined as:
 
 ```julia
 using JuliaSCGA

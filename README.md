@@ -1,11 +1,13 @@
 # JuliaSCGA.jl
 JuliaSCGA.jl is a Julia package that implements the self-consistent Gaussian approximation (SCGA) method. Starting from a general spin Hamiltonian of isotropic or anisotropic exchange interactions and single ion anisotropy, the SCGA method calculates the spin-spin correlations in the designated reciprocal space. Compared to other methods like the classical Monte Carlo simulations, the SCGA method provides an efficient way to analyze the diffuse neutron scattering data, which can be utilized to determine the spin Hamiltonian through fits to the experimental data using optimization packages like [Optim.jl](https://github.com/JuliaNLSolvers/Optim.jl/).
 
+## Installation
 To install JuliaSCGA.jl, type the following command in the Julia REPL:
 ```julia
 ] add https://github.com/moon-dust/JuliaSCGA.jl
 ```
 
+## Model definition
 In JuliaSCGA.jl, the definition of the [UnitCell](src/UnitCell.jl), including the [InteractionMatrix](src/InteractionMatrix.jl), inherits from [SpinMC.jl](https://github.com/fbuessen/SpinMC.jl). As shown in the example, the *J<sub>1</sub>-J<sub>2</sub>* model on a diamond lattice can be defined as:
 
 ```julia
@@ -43,8 +45,8 @@ addInteraction!(uc, b2, b2, J2, (0, 1, 0))
 addInteraction!(uc, b2, b2, J2, (0, 0, 1)) 
 ```
 The current version of JuliaSCGA.jl (0.1.2) only works for 3-dimensional lattices. For 2-dimensional lattices like the triangular lattice, please consider adding a third basis vector that is perpendicular to the 2D lattice and applying no interlayer couplings.
-
-Then we define points in reciprocal space of the primary cell where the spin-spin correlation will be calculated:
+## Calculation
+Define the *k* points in reciprocal space of the primary cell where the spin-spin correlation will be calculated:
 ```julia
 # calculate the spin correlations in the (hk0) plane, defined in the cubic cell
 k_grid = [0:0.005:3;]
@@ -89,6 +91,7 @@ For the example diamond lattice code with *J<sub>1</sub>* = -1 and *J<sub>2</sub
 
 ![](assets/diamond_0p25.png)
 
+## Multi-Threading
 JuliaSCGA.jl supports the [Multi-Threading](https://docs.julialang.org/en/v1/manual/multi-threading/) option to speed up the calculation. To activate this option, following this [page](https://stackoverflow.com/questions/71596187/changing-threads-in-settings-json-of-vs-code-for-julias-jupyter-notebooks) to set the number of threads in VS code.
 
 

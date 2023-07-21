@@ -89,6 +89,6 @@ For the example diamond lattice code with *J<sub>1</sub>* = -1 and *J<sub>2</sub
 
 ![](assets/diamond_0p25.png)
 
-
+JuliaSCGA.jl supports the [Multi-Threading](https://docs.julialang.org/en/v1/manual/multi-threading/) option to speed up the calculation. To activate this option, following this [page](https://stackoverflow.com/questions/71596187/changing-threads-in-settings-json-of-vs-code-for-julias-jupyter-notebooks) to set the number of threads in VS code.
 
 

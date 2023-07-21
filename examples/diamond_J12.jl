@@ -59,6 +59,6 @@ correl = getCorr_iso(uc, Jq_calc, β, λ)
 using Plots
 gr()
 heatmap(qx[:,1], qy[1,:], reshape(correl, axes(qx)), xlabel="qx", ylabel="qy", aspect_ratio=1, size=(400,400))
-
+savefig("diamond_0p25.png")
 
 

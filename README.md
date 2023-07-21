@@ -58,19 +58,19 @@ q_crys = qmat*q_calc'
 q_crys = q_crys'*1.0
 ```
 
-Before calculating the spin correlations, the bonding vectors among the spins are saved for efficiency:
+Before calculating the spin correlations, the bonding vectors among the spins are stored for efficiency:
 ```julia
 # generate the bonding distance vector as a N*3 matrix
 dist = getDist(uc)
 ```
 
-Then we can calculate the interaction matrix for the *k* points of interest.
+The interaction matrix for the *k* points of interest are calculated and stored:
 ```julia
 # calculate the interaction matrix
 Jq_calc = getFourier_iso(uc, dist, q_crys)
 ```
 
-We also perform a self-consistent calculation for the Lagrange multiplier $\lambda$ at reverse temperature $\beta$:
+A self-consistent calculation is obtained to obtain the Lagrange multiplier $\lambda$ at reverse temperature $\beta$:
 ```julia
 # solve lambda
 β = 2.0
@@ -84,5 +84,11 @@ using Plots
 gr()
 heatmap(qx[:,1], qy[1,:], reshape(correl, axes(qx)), xlabel="qx", ylabel="qy", aspect_ratio=1, size=(400,400))
 ```
+
+For the example diamond lattice code with *J<sub>1</sub>* = -1 and *J<sub>2</sub>* = 0.25, the calculated diffuse pattern looks like this:
+
+![](assets/diamond_0p25.png)
+
+
 
 

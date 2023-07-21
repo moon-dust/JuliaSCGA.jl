@@ -1,21 +1,18 @@
-using JuliaSCGA, LinearAlgebra, Optim
-using Base.Threads, ProgressMeter
-# using Distributed
+using JuliaSCGA
 
-# ShG230406, prototype SCGA code, J1-J2 model on the diamond lattice
-
-# step1, define the model
-@time begin
+# define the basis vectors of the primitive cell
 a1 = (7.5095, 0.0000, 0.0000) 
 a2 = (3.7547, 6.5034, 0.0000) 
 a3 = (3.7547, 2.1678, 6.1315) 
-
 uc = UnitCell(a1,a2,a3) 
+
+# add atom positions
 b1 = addBasisSite!(uc, (1.8774, 1.0839, 0.7664)) 
 b2 = addBasisSite!(uc, (13.1416, 7.5873, 5.3650)) 
 
-J1 = [-1.00 -0.00 -0.00; -0.00 -1.00 -0.00; -0.00 -0.00 -1.00] 
-J2 = [1.00 0.00 0.00; 0.00 1.00 0.00; 0.00 0.00 1.00].*0.25
+# define coupling matrices and apply to the bonds
+J1 = [1.00 0.00 0.00; 0.00 1.00 0.00; 0.00 0.00 1.00]*-1.00 
+J2 = [1.00 0.00 0.00; 0.00 1.00 0.00; 0.00 0.00 1.00]* 0.25
 
 addInteraction!(uc, b2, b1, J1, (1, 1, 0)) 
 addInteraction!(uc, b2, b1, J1, (1, 0, 1)) 
@@ -33,7 +30,6 @@ addInteraction!(uc, b1, b1, J2, (0, 0, 1))
 addInteraction!(uc, b2, b2, J2, (1, 0, 0)) 
 addInteraction!(uc, b2, b2, J2, (0, 1, 0)) 
 addInteraction!(uc, b2, b2, J2, (0, 0, 1)) 
-
 
 # spin correlations in the k-plane defined in the cubic cell
 k_grid = [0:0.005:3;]
@@ -58,7 +54,6 @@ lam_answer = solveLambda_iso(uc, beta)
 
 # finally, calculate the correlation function
 correl = getCorr_iso(uc, Jq_calc, beta, lam_answer)
-end
 
 # plot diffuse pattern using GR for speed
 using Plots

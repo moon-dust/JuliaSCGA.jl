@@ -66,19 +66,4 @@ gr()
 heatmap(qx[:,1], qy[1,:], reshape(correl, axes(qx)), xlabel="qx", ylabel="qy", aspect_ratio=1, size=(400,400))
 
 
-# plot diffuse pattern using PyPlot
-# using PyPlot
-# fig = PyPlot.figure(figsize=(6,6))
-# ax = fig.add_subplot()
-# pcontour = ax.pcolor(qx, qy, reshape(correl, axes(qx)))
-# xlabel("qx")
-# ylabel("qy")
-# # PyPlot.xlim(-1, 1)
-# # PyPlot.ylim(-1, 1)
-# title("diffuse pattern")
-# # ax.axes.grid(visible=false)
-# ax.set_aspect("equal")
-# colorbar(pcontour, fraction=0.046, pad=0.04)
-# display(gcf())
-
 

@@ -1,0 +1,8 @@
+name = "JuliaSCGA"
+uuid = "ffa09b62-2c52-4baa-b1fc-4a5c8653dd7f"
+authors = ["Shang Gao"]
+version = "0.1.2"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"

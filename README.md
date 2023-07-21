@@ -42,7 +42,7 @@ addInteraction!(uc, b2, b2, J2, (1, 0, 0))
 addInteraction!(uc, b2, b2, J2, (0, 1, 0)) 
 addInteraction!(uc, b2, b2, J2, (0, 0, 1)) 
 ```
-In the current version of JuliaSCGA.jl (0.1.2), the code only works for 3-dimensional lattices. Therefore, for 2-dimensional lattices like the triangular lattice, please consider adding a third basis vector perpendicular to the layer and applying no interlayer couplings.
+The current version of JuliaSCGA.jl (0.1.2) only works for 3-dimensional lattices. For 2-dimensional lattices like the triangular lattice, please consider adding a third basis vector that is perpendicular to the 2D lattice and applying no interlayer couplings.
 
 Then we define points in reciprocal space of the primary cell where the spin-spin correlation will be calculated:
 ```julia

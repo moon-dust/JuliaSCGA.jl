@@ -49,11 +49,11 @@ dist = getDist(uc)
 Jq_calc = getFourier_iso(uc, dist, q_crys)
 
 # solve lambda
-beta = 2.0
-lam_answer = solveLambda_iso(uc, beta)
+β = 2.0
+λ = solveLambda_iso(uc, β)
 
 # finally, calculate the correlation function
-correl = getCorr_iso(uc, Jq_calc, beta, lam_answer)
+correl = getCorr_iso(uc, Jq_calc, β, λ)
 
 # plot diffuse pattern using GR for speed
 using Plots

@@ -42,6 +42,47 @@ addInteraction!(uc, b2, b2, J2, (1, 0, 0))
 addInteraction!(uc, b2, b2, J2, (0, 1, 0)) 
 addInteraction!(uc, b2, b2, J2, (0, 0, 1)) 
 ```
+In the current version of JuliaSCGA.jl (0.1.2), the code only works for 3-dimensional lattices. Therefore, for 2-dimensional lattices like the triangular lattice, please consider adding a third basis vector perpendicular to the layer and applying no interlayer couplings.
 
+Then we define points in reciprocal space of the primary cell where the spin-spin correlation will be calculated:
+```julia
+# calculate the spin correlations in the (hk0) plane, defined in the cubic cell
+k_grid = [0:0.005:3;]
+qx = [x_grid for x_grid in k_grid, y_grid in k_grid]
+qy = [y_grid for x_grid in k_grid, y_grid in k_grid]
+q_calc = [vec(qx) vec(qy) zeros(length(qx))]
+
+# transfer to the primitive cell
+qmat = [1/2 1/2 0; 0 1/2 1/2; 1/2 0 1/2]
+q_crys = qmat*q_calc'
+q_crys = q_crys'*1.0
+```
+
+Before calculating the spin correlations, the bonding vectors among the spins are saved for efficiency:
+```julia
+# generate the bonding distance vector as a N*3 matrix
+dist = getDist(uc)
+```
+
+Then we can calculate the interaction matrix for the *k* points of interest.
+```julia
+# calculate the interaction matrix
+Jq_calc = getFourier_iso(uc, dist, q_crys)
+```
+
+We also perform a self-consistent calculation for the Lagrange multiplier $\lambda$ at reverse temperature $\beta$:
+```julia
+# solve lambda
+β = 2.0
+λ = solveLambda_iso(uc, beta)
+```
+Finally, calculate the spin correlation function and plot the results:
+```julia
+correl = getCorr_iso(uc, Jq_calc, β, λ)
+
+using Plots
+gr()
+heatmap(qx[:,1], qy[1,:], reshape(correl, axes(qx)), xlabel="qx", ylabel="qy", aspect_ratio=1, size=(400,400))
+```
 
 
